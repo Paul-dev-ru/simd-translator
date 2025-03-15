@@ -13,13 +13,13 @@ class  AssemblyParser : public antlr4::Parser {
 public:
   enum {
     T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, VALID_NAME = 7, 
-    INT = 8, WS = 9
+    INT = 8, NEWLINE = 9, WS = 10
   };
 
   enum {
-    RuleProgram = 0, RuleStatement = 1, RuleAddStatement = 2, RuleSubStatement = 3, 
-    RuleCmpStatement = 4, RuleJzStatement = 5, RuleRegister = 6, RuleOperand = 7, 
-    RuleLabel = 8
+    RuleProgram = 0, RuleStatement = 1, RuleLabelDeclaration = 2, RuleAddStatement = 3, 
+    RuleSubStatement = 4, RuleCmpStatement = 5, RuleJzStatement = 6, RuleRegister = 7, 
+    RuleOperand = 8, RuleLabel = 9
   };
 
   explicit AssemblyParser(antlr4::TokenStream *input);
@@ -41,6 +41,7 @@ public:
 
   class ProgramContext;
   class StatementContext;
+  class LabelDeclarationContext;
   class AddStatementContext;
   class SubStatementContext;
   class CmpStatementContext;
@@ -56,6 +57,8 @@ public:
     antlr4::tree::TerminalNode *EOF();
     std::vector<StatementContext *> statement();
     StatementContext* statement(size_t i);
+    std::vector<antlr4::tree::TerminalNode *> NEWLINE();
+    antlr4::tree::TerminalNode* NEWLINE(size_t i);
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -70,6 +73,7 @@ public:
   public:
     StatementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
+    LabelDeclarationContext *labelDeclaration();
     AddStatementContext *addStatement();
     SubStatementContext *subStatement();
     CmpStatementContext *cmpStatement();
@@ -84,12 +88,29 @@ public:
 
   StatementContext* statement();
 
+  class  LabelDeclarationContext : public antlr4::ParserRuleContext {
+  public:
+    LabelDeclarationContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    LabelContext *label();
+    antlr4::tree::TerminalNode *NEWLINE();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  LabelDeclarationContext* labelDeclaration();
+
   class  AddStatementContext : public antlr4::ParserRuleContext {
   public:
     AddStatementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     RegisterContext *register_();
     OperandContext *operand();
+    antlr4::tree::TerminalNode *NEWLINE();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -106,6 +127,7 @@ public:
     virtual size_t getRuleIndex() const override;
     RegisterContext *register_();
     OperandContext *operand();
+    antlr4::tree::TerminalNode *NEWLINE();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -122,6 +144,7 @@ public:
     virtual size_t getRuleIndex() const override;
     RegisterContext *register_();
     OperandContext *operand();
+    antlr4::tree::TerminalNode *NEWLINE();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -137,6 +160,7 @@ public:
     JzStatementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     LabelContext *label();
+    antlr4::tree::TerminalNode *NEWLINE();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;

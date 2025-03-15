@@ -23,6 +23,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual std::any visitLabelDeclaration(AssemblyParser::LabelDeclarationContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual std::any visitAddStatement(AssemblyParser::AddStatementContext *ctx) override {
     return visitChildren(ctx);
   }

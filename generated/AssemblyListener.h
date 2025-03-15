@@ -20,6 +20,9 @@ public:
   virtual void enterStatement(AssemblyParser::StatementContext *ctx) = 0;
   virtual void exitStatement(AssemblyParser::StatementContext *ctx) = 0;
 
+  virtual void enterLabelDeclaration(AssemblyParser::LabelDeclarationContext *ctx) = 0;
+  virtual void exitLabelDeclaration(AssemblyParser::LabelDeclarationContext *ctx) = 0;
+
   virtual void enterAddStatement(AssemblyParser::AddStatementContext *ctx) = 0;
   virtual void exitAddStatement(AssemblyParser::AddStatementContext *ctx) = 0;
 

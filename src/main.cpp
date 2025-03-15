@@ -4,6 +4,7 @@
 #include "AssemblyParser.h"
 #include "CustomAssemblyVisitor.h"
 #include "ExecutableGenerator.h"
+#include "LabelVisitor.h"
 
 
 void saveBinary(const std::string& filename, const std::vector<uint8_t>& data) {
@@ -14,10 +15,18 @@ void saveBinary(const std::string& filename, const std::vector<uint8_t>& data) {
 
 
 int main() {
-    std::stringstream ss;
-    ss << "add eax, 81\n";
-    ss << "sub eax, 11\n";
-    std::string input = ss.str();
+    std::string input =
+    "start:\n"
+    "   add eax, 4\n"
+    "   sub eax, 2\n"
+    "   cmp eax, 1\n"
+    "   jz end\n"
+    "middle:\n"
+    "   add eax, 1\n"
+    "   sub eax, 3\n"
+    "   cmp eax, 12\n"
+    "   jz middle\n"
+    "end:\n";
 
     antlr4::ANTLRInputStream inputStream{ input };
     AssemblyLexer lexer{ &inputStream };
@@ -27,8 +36,18 @@ int main() {
 
     AssemblyParser::ProgramContext *tree = parser.program();
 
+    LabelVisitor labelVisitor;
+    labelVisitor.visitProgram(tree);
+
+    std::cout << "\nLabel Table Info: ----------------------------------------\n";
+    for (const auto& [label, offset] : labelVisitor.getLabelTable()) {
+        std::cout << "Label \"" << label << "\" at byte offset: " << offset << "\n";
+    }
+    std::cout << "----------------------------------------------------------\n\n";
+
     CustomAssemblyVisitor visitor;
     visitor.visit(tree);
+
 
     const auto& code = visitor.getMachineCode();
     ExecutableGenerator gen{ code };

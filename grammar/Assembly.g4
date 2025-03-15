@@ -1,25 +1,33 @@
 grammar Assembly;
 
-program: statement* EOF;
+program: statement* NEWLINE* EOF;
 
 statement
-    : (addStatement | subStatement | cmpStatement | jzStatement)
+    : labelDeclaration
+    | addStatement 
+    | subStatement 
+    | cmpStatement 
+    | jzStatement
+    ;
+
+labelDeclaration
+    : label ':' NEWLINE
     ;
 
 addStatement
-    : 'add' register ',' operand '\n'
+    : 'add' register ',' operand NEWLINE
     ;
 
 subStatement
-    : 'sub' register ',' operand '\n'
+    : 'sub' register ',' operand NEWLINE
     ;
 
 cmpStatement
-    : 'cmp' register ',' operand '\n'
+    : 'cmp' register ',' operand NEWLINE
     ;
 
 jzStatement
-    : 'jz' label '\n'
+    : 'jz' label NEWLINE
     ;
 
 register
@@ -37,4 +45,5 @@ label
 VALID_NAME : [a-zA-Z_] [a-zA-Z_0-9]*;
 INT : '-'? [0-9]+;
 
-WS: [ \t\r\n]+ -> skip;
+NEWLINE : '\r'? '\n';
+WS: [ \t]+ -> skip;

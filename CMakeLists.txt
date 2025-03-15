@@ -35,6 +35,7 @@ add_executable(SimdTranslator
     src/main.cpp
     src/CustomAssemblyVisitor.cpp
     src/ExecutableGenerator.cpp
+    src/LabelVisitor.cpp
 )
 
 target_sources(SimdTranslator PRIVATE ${ANTLR4_GENERATED_SOURCES})

@@ -22,6 +22,9 @@ public:
   virtual void enterStatement(AssemblyParser::StatementContext * /*ctx*/) override { }
   virtual void exitStatement(AssemblyParser::StatementContext * /*ctx*/) override { }
 
+  virtual void enterLabelDeclaration(AssemblyParser::LabelDeclarationContext * /*ctx*/) override { }
+  virtual void exitLabelDeclaration(AssemblyParser::LabelDeclarationContext * /*ctx*/) override { }
+
   virtual void enterAddStatement(AssemblyParser::AddStatementContext * /*ctx*/) override { }
   virtual void exitAddStatement(AssemblyParser::AddStatementContext * /*ctx*/) override { }
 
