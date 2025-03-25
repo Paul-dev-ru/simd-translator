@@ -8,6 +8,7 @@ statement
     | subStatement 
     | cmpStatement 
     | jzStatement
+    | jmpStatement
     ;
 
 labelDeclaration
@@ -28,6 +29,10 @@ cmpStatement
 
 jzStatement
     : 'jz' label NEWLINE
+    ;
+
+jmpStatement
+    : 'jmp' label NEWLINE
     ;
 
 register

@@ -35,6 +35,9 @@ public:
   virtual void enterJzStatement(AssemblyParser::JzStatementContext *ctx) = 0;
   virtual void exitJzStatement(AssemblyParser::JzStatementContext *ctx) = 0;
 
+  virtual void enterJmpStatement(AssemblyParser::JmpStatementContext *ctx) = 0;
+  virtual void exitJmpStatement(AssemblyParser::JmpStatementContext *ctx) = 0;
+
   virtual void enterRegister(AssemblyParser::RegisterContext *ctx) = 0;
   virtual void exitRegister(AssemblyParser::RegisterContext *ctx) = 0;
 

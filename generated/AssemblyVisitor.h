@@ -33,6 +33,8 @@ public:
 
     virtual std::any visitJzStatement(AssemblyParser::JzStatementContext *context) = 0;
 
+    virtual std::any visitJmpStatement(AssemblyParser::JmpStatementContext *context) = 0;
+
     virtual std::any visitRegister(AssemblyParser::RegisterContext *context) = 0;
 
     virtual std::any visitOperand(AssemblyParser::OperandContext *context) = 0;

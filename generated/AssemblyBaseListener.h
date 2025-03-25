@@ -37,6 +37,9 @@ public:
   virtual void enterJzStatement(AssemblyParser::JzStatementContext * /*ctx*/) override { }
   virtual void exitJzStatement(AssemblyParser::JzStatementContext * /*ctx*/) override { }
 
+  virtual void enterJmpStatement(AssemblyParser::JmpStatementContext * /*ctx*/) override { }
+  virtual void exitJmpStatement(AssemblyParser::JmpStatementContext * /*ctx*/) override { }
+
   virtual void enterRegister(AssemblyParser::RegisterContext * /*ctx*/) override { }
   virtual void exitRegister(AssemblyParser::RegisterContext * /*ctx*/) override { }
 

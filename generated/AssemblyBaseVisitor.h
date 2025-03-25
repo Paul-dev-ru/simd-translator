@@ -43,6 +43,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual std::any visitJmpStatement(AssemblyParser::JmpStatementContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual std::any visitRegister(AssemblyParser::RegisterContext *ctx) override {
     return visitChildren(ctx);
   }
