@@ -17,6 +17,8 @@ antlrcpp::Any LabelVisitor::visitStatement(AssemblyParser::StatementContext* con
         offset += 3;  // Увеличиваем смещение на 3 байта для арифметических операций
     } else if (context->jzStatement()) {
         offset += 2;  // Увеличиваем смещение на 2 байта для команд перехода
+    } else if (context->jmpStatement()) {
+        offset += 5;
     }
     return antlrcpp::Any{};
 }
