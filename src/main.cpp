@@ -48,14 +48,10 @@ void printMachineCode(const std::vector<std::vector<uint8_t>>& machineCode,
 int main() {
     std::string input =
     "start:\n"
-    "   add eax, 4\n"
-    "   sub eax, 2\n"
+    "   add eax, 1\n"
+    "   add eax, 1\n"
     "   jmp end\n"
-    "middle:\n"
     "   add eax, 1\n"
-    "   add eax, 1\n"
-    "   cmp eax, 20\n"
-    "   jz start\n"
     "end:\n";
 
     antlr4::ANTLRInputStream inputStream{ input };
@@ -81,11 +77,16 @@ int main() {
 
     printMachineCode(visitor.getMachineCode(), visitor.getOffsetToAsm());
 
-    // const auto& code = visitor.getMachineCode();
-    // ExecutableGenerator gen{ code };
-    // auto executable = gen.generateExecutable();
+    const auto& code = visitor.getMachineCode();
+    std::vector<uint8_t> allCodeBytes;
+    for (const auto& instruction : code) {
+        allCodeBytes.insert(allCodeBytes.end(), instruction.begin(), instruction.end());
+    }
 
-    // saveBinary("executable", executable);
+    ExecutableGenerator gen{ allCodeBytes };
+    auto executable = gen.generateExecutable();
+
+    saveBinary("executable", executable);
 
     return 0;
 }
