@@ -30,7 +30,7 @@ sudo make install
 Клонируйте репозиторий проекта с GitHub. Перейдите в директорию, куда Вы хотите склонировать проект и выполните следующие команды:
 
 ```
-git clone https://github.com/KonstantinMikhel/simd-translator.git
+git clone https://github.com/Paul-dev-ru/simd-translator.git
 cd simd-translator
 ```
 
