@@ -1,5 +1,5 @@
+#include <array>
 #include "CustomAssemblyVisitor.h"
-
 
 uint8_t CustomAssemblyVisitor::getModrmByte(Operation operation, Register register_) {
     static const std::map<Register, uint8_t> addModrm = {
